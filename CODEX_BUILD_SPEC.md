@@ -75,3 +75,10 @@ Build a dealership sales-log importer and month-end reporting application. This 
 - Wholesale is a future category; include its rows/schema without inventing data.
 - Clarify whether headline gross means front-only or front plus F&I from the real log/accounting definitions before locking formulas.
 - Tests must assert that adding BF changes including-BF gross totals but leaves excluding-BF gross totals and all gross averages unchanged, while increasing eligible official unit counts.
+
+## Wally gross summary display priority
+- Make **Total Gross After Write-Downs** and **Average Gross Per Unit After Write-Downs** the largest headline KPIs. The total must clearly identify whether it includes BF; the average always excludes BF.
+- Immediately below, show New, Used, Wholesale, and Combined with gross total and per-unit average. Provide before/after write-down toggles or paired columns, and gross with/without BF totals.
+- Break out front-end gross, F&I gross, write-downs, and combined gross, without double-counting write-downs. Show both gross components rather than treating them as interchangeable.
+- The headline averages use only non-BF eligible units and gross, even if the headline gross total includes BF; label the differing populations clearly.
+- Prioritize readable monthly management reporting over an excessively wide table. Allow drilldown and preserve source reconciliation.
