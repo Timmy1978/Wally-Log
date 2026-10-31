@@ -43,3 +43,25 @@ Build a dealership sales-log importer and month-end reporting application. This 
 - Implement data normalization, classification and allocation as testable pure functions before dashboard UI.
 - Provide a simple import workflow, month selector, dashboard, salesperson detail, validation warnings and exports.
 - No customer phone numbers or other personal information in test fixtures, screenshots, public repository commits, or logs.
+
+
+## Gross profit and write-downs — Wally Summary
+- Add New, Used, Wholesale, and Total rows; Wholesale is a planned future import category and must be supported without inventing historical records.
+- For each row show distinct deal units, gross before write-downs, write-down amount, gross after write-downs, average gross/unit before write-downs, and average gross/unit after write-downs.
+- Total includes Wholesale; sum each deal only once. Compute averages using distinct eligible transaction counts (not salesperson split credits). Zero-denominator averages display N/A.
+- Gross after write-downs = gross before write-downs minus applicable write-downs; verify the sign convention and whether source gross is already net of write-downs, to prevent double deductions.
+- Preserve front gross, F&I gross, and combined gross as separate accounting measures. Confirm whether the requested headline gross is front or combined before finalizing financial calculations.
+- Determine classification for BF, Bud, TLBO and NC versus New/Used/Wholesale using the actual source data and approved rules; do not silently exclude or double count categories.
+- Provide drilldown to source deals, write-down amounts, and any reconciliation errors.
+
+## Alliance resident sales
+- Add a salesperson-by-category Alliance customer report with columns Alliance New, Alliance Used, Alliance BF, Alliance Bud, and total distinct qualifying Alliance deals; prominently surface Alliance New separately.
+- Match customer residence city Alliance, Ohio from the actual customer city/state fields, case-insensitively, with whitespace/abbreviation normalization; do not infer residence from dealership location. Flag missing/ambiguous city/state.
+- Include every distinct salesperson name in either sales column, with 50/50 fractional attribution for splits and 100% for solo deals. Preserve distinct dealership transaction totals.
+- BF and Bud may overlap New/Used; do not add overlapping columns to produce total. Calculate total from unique qualifying deals with salesperson allocations.
+- Apply the existing TLBO/NC official-count exclusions to the Alliance qualifying totals, but permit separately visible excluded activity for audit.
+- Show person detail with source stock/deal ID, sale type, city, classification, split credit and exclusion reason.
+
+## Additional acceptance tests
+- Validate new/used/wholesale rollup and averages before/after write-downs, including zero units, negative gross, write-down sign handling, and prevention of double deductions.
+- Validate Alliance case-insensitive city matching, non-Alliance exclusion, BF/Bud overlap, 50/50 split, TLBO/NC exclusion, and dealership-versus-person reconciliation.
