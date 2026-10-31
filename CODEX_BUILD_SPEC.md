@@ -65,3 +65,13 @@ Build a dealership sales-log importer and month-end reporting application. This 
 ## Additional acceptance tests
 - Validate new/used/wholesale rollup and averages before/after write-downs, including zero units, negative gross, write-down sign handling, and prevention of double deductions.
 - Validate Alliance case-insensitive city matching, non-Alliance exclusion, BF/Bud overlap, 50/50 split, TLBO/NC exclusion, and dealership-versus-person reconciliation.
+
+
+## Confirmed BF treatment in Wally gross summary (2026-10-31)
+- Display New, Used, Wholesale, and Total gross dollar totals BOTH including BF and excluding BF, each before and after write-downs. Do not count a BF transaction twice in the including-BF total.
+- ALL average gross/unit figures (before and after write-downs, category and overall) MUST EXCLUDE BF from both the gross numerator and the unit denominator. Do not show an including-BF average.
+- BF remains included in official salesperson qualifying unit counts, subject to the TLBO/NC exclusions.
+- Keep a separately visible BF gross subtotal and BF unit count for audit and reconciliation.
+- Wholesale is a future category; include its rows/schema without inventing data.
+- Clarify whether headline gross means front-only or front plus F&I from the real log/accounting definitions before locking formulas.
+- Tests must assert that adding BF changes including-BF gross totals but leaves excluding-BF gross totals and all gross averages unchanged, while increasing eligible official unit counts.
